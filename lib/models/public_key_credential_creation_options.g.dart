@@ -18,6 +18,10 @@ PublicKeyCredentialCreationOptions _$PublicKeyCredentialCreationOptionsFromJson(
               PublicKeyCredentialParameters.fromJson(e as Map<String, dynamic>))
           .toList(),
       timeout: json['timeout'] as int,
+      authenticatorSelection: json['authenticatorSelection'] == null
+          ? null
+          : AuthenticatorSelectionCriteria.fromJson(
+              json['authenticatorSelection'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PublicKeyCredentialCreationOptionsToJson(
@@ -28,4 +32,5 @@ Map<String, dynamic> _$PublicKeyCredentialCreationOptionsToJson(
       'challenge': instance.challenge,
       'pubKeyCredParams': instance.pubKeyCredParams,
       'timeout': instance.timeout,
+      'authenticatorSelection': instance.authenticatorSelection,
     };

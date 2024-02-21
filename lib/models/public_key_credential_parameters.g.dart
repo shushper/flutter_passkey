@@ -9,16 +9,20 @@ part of 'public_key_credential_parameters.dart';
 PublicKeyCredentialParameters _$PublicKeyCredentialParametersFromJson(
         Map<String, dynamic> json) =>
     PublicKeyCredentialParameters(
-      type: json['type'] as String,
+      type: $enumDecode(_$PublicKeyCredentialTypeEnumMap, json['type']),
       alg: $enumDecode(_$COSEAlgorithmIdentifierEnumMap, json['alg']),
     );
 
 Map<String, dynamic> _$PublicKeyCredentialParametersToJson(
         PublicKeyCredentialParameters instance) =>
     <String, dynamic>{
-      'type': instance.type,
+      'type': _$PublicKeyCredentialTypeEnumMap[instance.type]!,
       'alg': _$COSEAlgorithmIdentifierEnumMap[instance.alg]!,
     };
+
+const _$PublicKeyCredentialTypeEnumMap = {
+  PublicKeyCredentialType.publicKey: 'public-key',
+};
 
 const _$COSEAlgorithmIdentifierEnumMap = {
   COSEAlgorithmIdentifier.ES256: -7,

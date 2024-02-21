@@ -1,7 +1,9 @@
-import 'package:flutter_passkey/models/public_key_credential_parameters.dart';
-import 'package:flutter_passkey/models/public_key_credential_rp.dart';
-import 'package:flutter_passkey/models/public_key_credential_user.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'authenticator_selection_criteria.dart';
+import 'public_key_credential_parameters.dart';
+import 'public_key_credential_rp.dart';
+import 'public_key_credential_user.dart';
 
 part 'public_key_credential_creation_options.g.dart';
 
@@ -13,6 +15,7 @@ class PublicKeyCredentialCreationOptions {
   final String challenge;
   final List<PublicKeyCredentialParameters> pubKeyCredParams;
   final int timeout;
+  final AuthenticatorSelectionCriteria? authenticatorSelection;
 
   PublicKeyCredentialCreationOptions({
     required this.rp,
@@ -20,6 +23,7 @@ class PublicKeyCredentialCreationOptions {
     required this.challenge,
     required this.pubKeyCredParams,
     required this.timeout,
+    this.authenticatorSelection,
   });
 
   factory PublicKeyCredentialCreationOptions.fromJson(

@@ -1,11 +1,12 @@
 import 'package:flutter_passkey/models/cose_agorithm_identifier.dart';
+import 'package:flutter_passkey/models/public_key_credential_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'public_key_credential_parameters.g.dart';
 
 @JsonSerializable()
 class PublicKeyCredentialParameters {
-  final String type;
+  final PublicKeyCredentialType type;
   final COSEAlgorithmIdentifier alg;
 
   PublicKeyCredentialParameters({
