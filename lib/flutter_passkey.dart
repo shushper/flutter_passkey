@@ -5,9 +5,32 @@ import 'flutter_passkey_platform_interface.dart';
 import 'models/public_key_credential_creation_options.dart';
 
 class FlutterPasskey {
+
   Future<String?> getPlatformVersion() {
     return FlutterPasskeyPlatform.instance.getPlatformVersion();
   }
+
+  Future<bool> isSupported() async {
+    final isSupported = await FlutterPasskeyPlatform.instance
+        .getPlatformVersion()
+        .then((osVersion) {
+      if (osVersion == null) {
+        return false;
+      }
+      final list = osVersion.split(' ');
+      final version = int.tryParse(list[1].split('.').first) ?? 0;
+      switch (list.first) {
+        case 'iOS':
+          return (version >= 15);
+        case 'Android':
+          return (version >= 9);
+        default:
+          return false;
+      }
+    });
+    return isSupported;
+  }
+
 
   Future<RegistrationResponse> createCredential(
     PublicKeyCredentialCreationOptions options,
