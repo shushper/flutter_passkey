@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_passkey/models/registration_response.dart';
 
 import 'flutter_passkey_platform_interface.dart';
 import 'models/public_key_credential_creation_options.dart';
@@ -8,7 +9,7 @@ class FlutterPasskey {
     return FlutterPasskeyPlatform.instance.getPlatformVersion();
   }
 
-  Future<String> createCredential(
+  Future<RegistrationResponse> createCredential(
     PublicKeyCredentialCreationOptions options,
   ) async {
     final response =
@@ -23,7 +24,7 @@ class FlutterPasskey {
 
   Future<String> getCredential(String options) async {
     final response =
-    await FlutterPasskeyPlatform.instance.getCredential(options);
+        await FlutterPasskeyPlatform.instance.getCredential(options);
     if (response == null) {
       throw PlatformException(
           code: "null-response",

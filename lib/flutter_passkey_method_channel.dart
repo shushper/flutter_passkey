@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import 'flutter_passkey_platform_interface.dart';
 import 'models/public_key_credential_creation_options.dart';
+import 'models/registration_response.dart';
 
 /// An implementation of [FlutterPasskeyPlatform] that uses method channels.
 class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
@@ -20,13 +21,18 @@ class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
   }
 
   @override
-  Future<String?> createCredential(
-      PublicKeyCredentialCreationOptions options) async {
+  Future<RegistrationResponse?> createCredential(PublicKeyCredentialCreationOptions options) async {
+
     final optionsString = jsonEncode(options.toJson());
     final response = await methodChannel
         .invokeMethod<String>('createCredential', {'options': optionsString});
 
-    return response;
+    if (response != null) {
+      return RegistrationResponse.fromJson(jsonDecode(response));
+    } else {
+      return null;
+    }
+
   }
 
   @override
