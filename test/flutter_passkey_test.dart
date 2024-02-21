@@ -15,6 +15,11 @@ class MockFlutterPasskeyPlatform
   Future<String> createCredential(PublicKeyCredentialCreationOptions options) {
     return Future.value('credential');
   }
+
+  @override
+  Future<String> getCredential(String options) {
+    return Future.value('credential');
+  }
 }
 
 void main() {

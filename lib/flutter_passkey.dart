@@ -20,4 +20,15 @@ class FlutterPasskey {
     }
     return response;
   }
+
+  Future<String> getCredential(String options) async {
+    final response =
+    await FlutterPasskeyPlatform.instance.getCredential(options);
+    if (response == null) {
+      throw PlatformException(
+          code: "null-response",
+          message: "Unable to get response from Passkey.");
+    }
+    return response;
+  }
 }

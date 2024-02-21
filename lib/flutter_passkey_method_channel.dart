@@ -28,4 +28,11 @@ class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
 
     return response;
   }
+
+  @override
+  Future<String?> getCredential(String options) async {
+    final response = await methodChannel
+        .invokeMethod<String>('getCredential', {'options': options});
+    return response;
+  }
 }
