@@ -1,6 +1,6 @@
 name: flutter_passkey
-description: "Flutter passkey plulgin"
-version: 0.0.1
+description: Flutter plugin for using Passkey easily on iOS and Android platforms.
+version: 1.0.4
 homepage:
 
 environment:
@@ -11,11 +11,14 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  json_serializable: ^6.7.1
+  build_runner: ^2.3.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,3 +1,4 @@
+import 'package:flutter_passkey/models/public_key_credential_creation_options.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'flutter_passkey_method_channel.dart';
@@ -26,4 +27,10 @@ abstract class FlutterPasskeyPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<String?> createCredential(PublicKeyCredentialCreationOptions options) {
+    throw UnimplementedError(
+        'createCredential(String options) has not been implemented.');
+  }
+
 }
