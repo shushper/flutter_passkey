@@ -21,15 +21,24 @@ PublicKeyCredentialRequestOptions _$PublicKeyCredentialRequestOptionsFromJson(
     );
 
 Map<String, dynamic> _$PublicKeyCredentialRequestOptionsToJson(
-        PublicKeyCredentialRequestOptions instance) =>
-    <String, dynamic>{
-      'challenge': instance.challenge,
-      'timeout': instance.timeout,
-      'rpId': instance.rpId,
-      'allowCredentials': instance.allowCredentials,
-      'userVerification':
-          _$UserVerificationRequirementEnumMap[instance.userVerification],
-    };
+    PublicKeyCredentialRequestOptions instance) {
+  final val = <String, dynamic>{
+    'challenge': instance.challenge,
+    'timeout': instance.timeout,
+    'rpId': instance.rpId,
+    'allowCredentials': instance.allowCredentials,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('userVerification',
+      _$UserVerificationRequirementEnumMap[instance.userVerification]);
+  return val;
+}
 
 const _$UserVerificationRequirementEnumMap = {
   UserVerificationRequirement.required: 'required',

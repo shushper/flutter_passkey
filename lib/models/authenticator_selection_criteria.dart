@@ -5,7 +5,7 @@ import 'authenticator_attachment.dart';
 
 part 'authenticator_selection_criteria.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class AuthenticatorSelectionCriteria {
   final AuthenticatorAttachment? authenticatorAttachment;
   final UserVerificationRequirement? userVerification;

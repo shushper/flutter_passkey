@@ -17,14 +17,25 @@ PublicKeyCredentialDescriptor _$PublicKeyCredentialDescriptorFromJson(
     );
 
 Map<String, dynamic> _$PublicKeyCredentialDescriptorToJson(
-        PublicKeyCredentialDescriptor instance) =>
-    <String, dynamic>{
-      'type': _$PublicKeyCredentialTypeEnumMap[instance.type]!,
-      'id': instance.id,
-      'transports': instance.transports
+    PublicKeyCredentialDescriptor instance) {
+  final val = <String, dynamic>{
+    'type': _$PublicKeyCredentialTypeEnumMap[instance.type]!,
+    'id': instance.id,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'transports',
+      instance.transports
           ?.map((e) => _$AuthenticatorTransportEnumMap[e]!)
-          .toList(),
-    };
+          .toList());
+  return val;
+}
 
 const _$PublicKeyCredentialTypeEnumMap = {
   PublicKeyCredentialType.publicKey: 'public-key',

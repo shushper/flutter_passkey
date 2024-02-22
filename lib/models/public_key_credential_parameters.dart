@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'public_key_credential_parameters.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class PublicKeyCredentialParameters {
   final PublicKeyCredentialType type;
   final COSEAlgorithmIdentifier alg;

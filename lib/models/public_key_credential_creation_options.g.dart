@@ -25,12 +25,21 @@ PublicKeyCredentialCreationOptions _$PublicKeyCredentialCreationOptionsFromJson(
     );
 
 Map<String, dynamic> _$PublicKeyCredentialCreationOptionsToJson(
-        PublicKeyCredentialCreationOptions instance) =>
-    <String, dynamic>{
-      'rp': instance.rp,
-      'user': instance.user,
-      'challenge': instance.challenge,
-      'pubKeyCredParams': instance.pubKeyCredParams,
-      'timeout': instance.timeout,
-      'authenticatorSelection': instance.authenticatorSelection,
-    };
+    PublicKeyCredentialCreationOptions instance) {
+  final val = <String, dynamic>{
+    'rp': instance.rp,
+    'user': instance.user,
+    'challenge': instance.challenge,
+    'pubKeyCredParams': instance.pubKeyCredParams,
+    'timeout': instance.timeout,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticatorSelection', instance.authenticatorSelection);
+  return val;
+}

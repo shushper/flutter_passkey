@@ -16,13 +16,21 @@ AuthenticatorSelectionCriteria _$AuthenticatorSelectionCriteriaFromJson(
     );
 
 Map<String, dynamic> _$AuthenticatorSelectionCriteriaToJson(
-        AuthenticatorSelectionCriteria instance) =>
-    <String, dynamic>{
-      'authenticatorAttachment':
-          _$AuthenticatorAttachmentEnumMap[instance.authenticatorAttachment],
-      'userVerification':
-          _$UserVerificationRequirementEnumMap[instance.userVerification],
-    };
+    AuthenticatorSelectionCriteria instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticatorAttachment',
+      _$AuthenticatorAttachmentEnumMap[instance.authenticatorAttachment]);
+  writeNotNull('userVerification',
+      _$UserVerificationRequirementEnumMap[instance.userVerification]);
+  return val;
+}
 
 const _$AuthenticatorAttachmentEnumMap = {
   AuthenticatorAttachment.platform: 'platform',

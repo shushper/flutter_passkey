@@ -5,7 +5,8 @@ import 'public_key_credential_descriptor.dart';
 
 part 'public_key_credential_request_options.g.dart';
 
-@JsonSerializable()
+//https://w3c.github.io/webauthn/#dictdef-publickeycredentialrequestoptions
+@JsonSerializable(includeIfNull: false)
 class PublicKeyCredentialRequestOptions {
   final String challenge;
   final int timeout;

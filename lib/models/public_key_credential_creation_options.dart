@@ -8,7 +8,7 @@ import 'public_key_credential_user.dart';
 part 'public_key_credential_creation_options.g.dart';
 
 //https://w3c.github.io/webauthn/#dictdef-publickeycredentialcreationoptionsjson
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class PublicKeyCredentialCreationOptions {
   final PublicKeyCredentialRp rp;
   final PublicKeyCredentialUser user;

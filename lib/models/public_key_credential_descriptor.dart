@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'public_key_credential_descriptor.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class PublicKeyCredentialDescriptor {
   final PublicKeyCredentialType type;
   final String id;

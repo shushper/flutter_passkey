@@ -25,7 +25,11 @@ class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
   @override
   Future<RegistrationResponse?> createCredential(
       PublicKeyCredentialCreationOptions options) async {
+
     final optionsString = jsonEncode(options.toJson());
+
+    print('createCredential optionsString = $optionsString');
+
     final response = await methodChannel
         .invokeMethod<String>('createCredential', {'options': optionsString});
 
@@ -39,7 +43,11 @@ class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
   @override
   Future<AuthenticationResponse?> getCredential(
       PublicKeyCredentialRequestOptions options) async {
+
     final optionsString = jsonEncode(options.toJson());
+
+    print('getCredential optionsString = $optionsString');
+
     final response = await methodChannel
         .invokeMethod<String>('getCredential', {'options': optionsString});
 
