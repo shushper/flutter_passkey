@@ -40,8 +40,6 @@ class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
   Future<AuthenticationResponse?> getCredential(
       PublicKeyCredentialRequestOptions options) async {
     final optionsString = jsonEncode(options.toJson());
-    print('MethodChannelFlutterPasskey get credential');
-    print(optionsString);
     final response = await methodChannel
         .invokeMethod<String>('getCredential', {'options': optionsString});
 

@@ -11,14 +11,14 @@ class PublicKeyCredentialRequestOptions {
   final int timeout;
   final String rpId;
   final List<PublicKeyCredentialDescriptor> allowCredentials;
-  final UserVerificationRequirement userVerification;
+  final UserVerificationRequirement? userVerification;
 
   const PublicKeyCredentialRequestOptions({
     required this.challenge,
     required this.timeout,
     required this.rpId,
     required this.allowCredentials,
-    required this.userVerification,
+    this.userVerification,
   });
 
   factory PublicKeyCredentialRequestOptions.fromJson(

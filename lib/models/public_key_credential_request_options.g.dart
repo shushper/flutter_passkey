@@ -16,7 +16,7 @@ PublicKeyCredentialRequestOptions _$PublicKeyCredentialRequestOptionsFromJson(
           .map((e) =>
               PublicKeyCredentialDescriptor.fromJson(e as Map<String, dynamic>))
           .toList(),
-      userVerification: $enumDecode(
+      userVerification: $enumDecodeNullable(
           _$UserVerificationRequirementEnumMap, json['userVerification']),
     );
 
@@ -28,7 +28,7 @@ Map<String, dynamic> _$PublicKeyCredentialRequestOptionsToJson(
       'rpId': instance.rpId,
       'allowCredentials': instance.allowCredentials,
       'userVerification':
-          _$UserVerificationRequirementEnumMap[instance.userVerification]!,
+          _$UserVerificationRequirementEnumMap[instance.userVerification],
     };
 
 const _$UserVerificationRequirementEnumMap = {

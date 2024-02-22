@@ -11,7 +11,8 @@ AuthenticatorSelectionCriteria _$AuthenticatorSelectionCriteriaFromJson(
     AuthenticatorSelectionCriteria(
       authenticatorAttachment: $enumDecodeNullable(
           _$AuthenticatorAttachmentEnumMap, json['authenticatorAttachment']),
-      userVerification: json['userVerification'] as String?,
+      userVerification: $enumDecodeNullable(
+          _$UserVerificationRequirementEnumMap, json['userVerification']),
     );
 
 Map<String, dynamic> _$AuthenticatorSelectionCriteriaToJson(
@@ -19,10 +20,17 @@ Map<String, dynamic> _$AuthenticatorSelectionCriteriaToJson(
     <String, dynamic>{
       'authenticatorAttachment':
           _$AuthenticatorAttachmentEnumMap[instance.authenticatorAttachment],
-      'userVerification': instance.userVerification,
+      'userVerification':
+          _$UserVerificationRequirementEnumMap[instance.userVerification],
     };
 
 const _$AuthenticatorAttachmentEnumMap = {
   AuthenticatorAttachment.platform: 'platform',
   AuthenticatorAttachment.crossPlatform: 'cross-platform',
+};
+
+const _$UserVerificationRequirementEnumMap = {
+  UserVerificationRequirement.required: 'required',
+  UserVerificationRequirement.preferred: 'preferred',
+  UserVerificationRequirement.discouraged: 'discouraged',
 };
