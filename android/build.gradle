@@ -52,7 +52,12 @@ android {
     dependencies {
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.0.0'
-        implementation 'com.google.android.gms:play-services-fido:20.1.0'
+        implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+        implementation "androidx.credentials:credentials:1.2.0"
+
+        // optional - needed for credentials support from play services, for devices running
+        // Android 13 and below.
+        implementation "androidx.credentials:credentials-play-services-auth:1.2.0"
     }
 
     testOptions {
