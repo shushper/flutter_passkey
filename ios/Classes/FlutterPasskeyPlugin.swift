@@ -96,10 +96,10 @@ public class FlutterPasskeyPlugin: NSObject, FlutterPlugin {
         let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: rpId)
         let registrationRequest = platformProvider.createCredentialRegistrationRequest(challenge: challenge, name: userName, userID: userId)
         /*// Passkeys do not support attestation.
-        if let attestationPreference = options.attestation {
-            registrationRequest.attestationPreference = attestationPreference
-        }
-        */
+         if let attestationPreference = options.attestation {
+         registrationRequest.attestationPreference = attestationPreference
+         }
+         */
         if let userVerificationPreference = options.userVerification {
             registrationRequest.userVerificationPreference = userVerificationPreference
         }
@@ -226,7 +226,7 @@ public class FlutterPasskeyPlugin: NSObject, FlutterPlugin {
         return response
     }
     
-    private func generateCredentialAssertionResponse(_ credentialID: Data, _ userID: Data, _ signature: Data, _ rawAuthenticatorData: Data, _ rawClientDataJSON: Data) throws -> [String: Any] {
+    private func generateCredentialAssertionResponse(_ credentialID: Data, _ userID: Data?, _ signature: Data, _ rawAuthenticatorData: Data, _ rawClientDataJSON: Data) throws -> [String: Any] {
         let response = [
             "id": credentialID.base64url,
             "rawId": credentialID.base64url,
@@ -234,7 +234,7 @@ public class FlutterPasskeyPlugin: NSObject, FlutterPlugin {
             "response": [
                 "authenticatorData": rawAuthenticatorData.base64url,
                 "signature": signature.base64url,
-                "userHandle": userID.base64url,
+                "userHandle": userID?.base64url ?? "",
                 "clientDataJSON": rawClientDataJSON.base64url,
             ] as [String : Any],
             "getClientExtensionResults": [:] as [String : Any]
