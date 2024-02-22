@@ -1,11 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonEnum(valueField: 'value')
+@JsonEnum(fieldRename: FieldRename.kebab)
 enum AuthenticatorAttachment {
-  platform('platform'),
-  crossPlatform('cross-platform');
-
-  const AuthenticatorAttachment(this.value);
-
-  final String value;
+  platform,
+  crossPlatform,
 }

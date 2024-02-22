@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_passkey/models/public_key_credential_request_options.dart';
 import 'package:flutter_passkey/models/registration_response.dart';
 
 import 'flutter_passkey_platform_interface.dart';
@@ -45,7 +46,7 @@ class FlutterPasskey {
     return response;
   }
 
-  Future<String> getCredential(String options) async {
+  Future<String> getCredential(PublicKeyCredentialRequestOptions options) async {
     final response =
         await FlutterPasskeyPlatform.instance.getCredential(options);
     if (response == null) {

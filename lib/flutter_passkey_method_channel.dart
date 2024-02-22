@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_passkey/models/public_key_credential_request_options.dart';
 
 import 'flutter_passkey_platform_interface.dart';
 import 'models/public_key_credential_creation_options.dart';
@@ -21,8 +22,8 @@ class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
   }
 
   @override
-  Future<RegistrationResponse?> createCredential(PublicKeyCredentialCreationOptions options) async {
-
+  Future<RegistrationResponse?> createCredential(
+      PublicKeyCredentialCreationOptions options) async {
     final optionsString = jsonEncode(options.toJson());
     final response = await methodChannel
         .invokeMethod<String>('createCredential', {'options': optionsString});
@@ -32,13 +33,14 @@ class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
     } else {
       return null;
     }
-
   }
 
   @override
-  Future<String?> getCredential(String options) async {
+  Future<String?> getCredential(
+      PublicKeyCredentialRequestOptions options) async {
+    final optionsString = jsonEncode(options.toJson());
     final response = await methodChannel
-        .invokeMethod<String>('getCredential', {'options': options});
+        .invokeMethod<String>('getCredential', {'options': optionsString});
     return response;
   }
 }

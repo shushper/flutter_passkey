@@ -1,4 +1,4 @@
-import 'package:flutter_passkey/models/cose_agorithm_identifier.dart';
+import 'package:flutter_passkey/models/cose_algorithm_identifier.dart';
 import 'package:flutter_passkey/models/public_key_credential_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
