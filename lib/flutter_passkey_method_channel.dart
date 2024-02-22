@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_passkey/models/public_key_credential_request_options.dart';
 
 import 'flutter_passkey_platform_interface.dart';
+import 'models/authentication_response.dart';
 import 'models/public_key_credential_creation_options.dart';
 import 'models/registration_response.dart';
 
@@ -36,11 +37,18 @@ class MethodChannelFlutterPasskey extends FlutterPasskeyPlatform {
   }
 
   @override
-  Future<String?> getCredential(
+  Future<AuthenticationResponse?> getCredential(
       PublicKeyCredentialRequestOptions options) async {
     final optionsString = jsonEncode(options.toJson());
+    print('MethodChannelFlutterPasskey get credential');
+    print(optionsString);
     final response = await methodChannel
         .invokeMethod<String>('getCredential', {'options': optionsString});
-    return response;
+
+    if (response != null) {
+      return AuthenticationResponse.fromJson(jsonDecode(response));
+    } else {
+      return null;
+    }
   }
 }

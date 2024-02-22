@@ -154,7 +154,7 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     } else {
       challengeString.toByteArray()
     }
-    val allowedCredentials = jsonObj.getJSONArray("allowedCredentials")
+    val allowedCredentials = jsonObj.getJSONArray("allowCredentials")
     val publicKeys = ArrayList<PublicKeyCredentialDescriptor>()
     for (i in 0 until allowedCredentials.length()) {
       val cred = allowedCredentials.getJSONObject(i)
@@ -291,15 +291,7 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
           .build()
       )
       .setTimeoutSeconds(timeout)
-//      .setParameters(publicKeys)
-      .setParameters(
-        listOf(
-          PublicKeyCredentialParameters(
-            PublicKeyCredentialType.PUBLIC_KEY.toString(),
-            EC2Algorithm.ES256.algoValue
-          )
-        )
-      )
+      .setParameters(publicKeys)
       .build()
 
 

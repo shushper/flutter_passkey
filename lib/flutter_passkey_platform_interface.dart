@@ -2,6 +2,7 @@ import 'package:flutter_passkey/models/public_key_credential_creation_options.da
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'flutter_passkey_method_channel.dart';
+import 'models/authentication_response.dart';
 import 'models/public_key_credential_request_options.dart';
 import 'models/registration_response.dart';
 
@@ -35,7 +36,7 @@ abstract class FlutterPasskeyPlatform extends PlatformInterface {
         'createCredential(String options) has not been implemented.');
   }
 
-  Future<String?> getCredential(PublicKeyCredentialRequestOptions options) {
+  Future<AuthenticationResponse?> getCredential(PublicKeyCredentialRequestOptions options) {
     throw UnimplementedError(
         'getCredential(String options) has not been implemented.');
   }
