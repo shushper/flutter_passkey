@@ -62,9 +62,8 @@ class FlutterPasskeyPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Vie
     if (activity == null) {
       throw IllegalStateException("Activity not found")
     }
-    JSONObject(options) //
-    Log.d("SHUSHPER", "getCredential")
-    Log.d("SHUSHPER", "Options string = $options");// check if options is a valid json string
+    JSONObject(options)
+    // check if options is a valid json string
     val getPublicKeyCredentialOption = GetPublicKeyCredentialOption(
       requestJson = options
     )
@@ -78,7 +77,6 @@ class FlutterPasskeyPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Vie
         val credential = result.credential as PublicKeyCredential
         callback(credential.authenticationResponseJson, null)
       } catch (e: Exception) {
-        Log.d("SHUSHPER", "exception = ${e.message}")
         callback(null, e)
       }
     }
