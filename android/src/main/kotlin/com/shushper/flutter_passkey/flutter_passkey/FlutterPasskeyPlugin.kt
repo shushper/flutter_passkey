@@ -3,7 +3,6 @@ package com.shushper.flutter_passkey.flutter_passkey
 import android.app.Activity
 import android.content.Intent
 import android.util.Base64
-import android.util.Log
 import androidx.annotation.NonNull
 import com.google.android.gms.fido.Fido
 import com.google.android.gms.fido.fido2.api.common.Attachment
@@ -142,8 +141,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
   }
 
   private fun getCredential(options: String) {
-    Log.d(TAG, "getCredential")
-
     val context =
       activity ?: throw IllegalStateException("Activity not found")
 
@@ -187,7 +184,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     task.addOnSuccessListener { pendingIntent ->
 
       if (pendingIntent != null) {
-        Log.d(TAG, "startIntentSenderForResult")
         // Start a FIDO2 sign request.
         activity!!.startIntentSenderForResult(
           pendingIntent.intentSender,
@@ -213,8 +209,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     options: String
   ) {
 
-    Log.d(TAG, "createCredential")
-
     val context =
       activity ?: throw IllegalStateException("Activity not found")
 
@@ -236,12 +230,12 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     val displayName = user.getString("displayName")
     val id = user.getString("id")
 
-    val authenticatorSelection =
-      jsonObj.getJSONObject("authenticatorSelection")
-    val authenticatorAttachment =
-      authenticatorSelection.getString("authenticatorAttachment")
-    val userVerification =
-      authenticatorSelection.getString("userVerification")
+//    val authenticatorSelection =
+//      jsonObj.getJSONObject("authenticatorSelection")
+//    val authenticatorAttachment =
+//      authenticatorSelection.getString("authenticatorAttachment")
+//    val userVerification =
+//      authenticatorSelection.getString("userVerification")
 
     val timeout = jsonObj.getDouble("timeout")
 
@@ -278,35 +272,30 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
           displayName,
         )
       )
-      .setAuthenticatorSelection(
-        AuthenticatorSelectionCriteria.Builder()
-          .setAttachment(
-            Attachment.fromString(authenticatorAttachment)
-          )
-          .setResidentKeyRequirement(
-            ResidentKeyRequirement.fromString(
-              userVerification
-            )
-          )
-          .build()
-      )
+//      .setAuthenticatorSelection(
+//        AuthenticatorSelectionCriteria.Builder()
+//          .setAttachment(
+//            Attachment.fromString(authenticatorAttachment)
+//          )
+//          .setResidentKeyRequirement(
+//            ResidentKeyRequirement.fromString(
+//              userVerification
+//            )
+//          )
+//          .build()
+//      )
       .setTimeoutSeconds(timeout)
       .setParameters(publicKeys)
       .build()
 
 
-    Log.d(TAG, "creation options ready")
-
     val fido2ApiClient = Fido.getFido2ApiClient(context)
     val fido2PendingIntentTask =
       fido2ApiClient.getRegisterPendingIntent(creationOptions)
 
-    Log.d(TAG, "task set success listener")
-
     fido2PendingIntentTask.addOnSuccessListener { pendingIntent ->
 
       if (pendingIntent != null) {
-        Log.d(TAG, "startIntentSenderForResult")
         // Start a FIDO2 sign request.
         activity!!.startIntentSenderForResult(
           pendingIntent.intentSender,
@@ -318,8 +307,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
         )
       }
     }
-
-    Log.d(TAG, "task set failure listener")
 
     fido2PendingIntentTask.addOnFailureListener { e ->
       createCredentialResult?.error(
@@ -349,7 +336,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     resultCode: Int,
     data: Intent?
   ): Boolean {
-    Log.d(TAG, "onActivityResult")
     when (requestCode) {
       GET_CREDENTIAL_REQUEST_CODE -> {
         handleGetCredentialActivityResult(resultCode, data)
@@ -367,7 +353,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     resultCode: Int,
     data: Intent?
   ) {
-    Log.d(TAG, "handleGetCredentialActivityResult")
     when (resultCode) {
       FlutterFragmentActivity.RESULT_OK -> {
         data?.let {
@@ -412,7 +397,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     resultCode: Int,
     data: Intent?
   ) {
-    Log.d(TAG, "handleCreateCredentialActivityResult")
     when (resultCode) {
       FlutterFragmentActivity.RESULT_OK -> {
 
@@ -483,11 +467,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
       Base64.URL_SAFE or Base64.NO_PADDING or Base64.NO_WRAP
     )
 
-    Log.d(TAG, "keyHandleBase64: $keyHandleBase64")
-    Log.d(TAG, "clientDataJSON: $clientDataJson")
-    Log.d(TAG, "authenticatorDataBase64: $authenticatorDataBase64")
-    Log.d(TAG, "signatureBase64: $signatureBase64")
-
     val jsonResult = JSONObject()
     val jsonResponse = JSONObject()
     jsonResponse.put("authenticatorData", authenticatorDataBase64)
@@ -524,11 +503,6 @@ class FlutterPasskeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
       response.attestationObject,
       Base64.URL_SAFE or Base64.NO_PADDING or Base64.NO_WRAP
     )
-
-    Log.d(TAG, "keyHandleBase64: $keyHandleBase64")
-    Log.d(TAG, "clientDataJSON: $clientDataJson")
-    Log.d(TAG, "attestationObjectBase64: $attestationObjectBase64")
-
 
     val jsonResult = JSONObject()
     val jsonResponse = JSONObject()
